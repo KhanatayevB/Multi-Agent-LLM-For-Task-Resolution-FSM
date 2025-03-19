@@ -41,7 +41,7 @@ retry_counts = {}  # Dictionary to track retry counts for different API calls
 st.sidebar.title("⚙️ Configuration")
 
 # API configuration in sidebar with proper secret handling
-api_key = st.sidebar.text_input("Azure OpenAI API Key", value="9222bde64b194310b1aadcff3ae5b60b", type="password")
+api_key = st.sidebar.text_input("Azure OpenAI API Key", value="YOUR_KEY_GOES_HERE", type="password")
 base_url = st.sidebar.text_input("Base URL", value="https://fkopenai.openai.azure.com/")
 api_version = st.sidebar.text_input("API Version", value="2024-02-15-preview")
 model = st.sidebar.selectbox("Model", ["gpt-4o-mini", "gpt-4o", "gpt-4"], index=0)
