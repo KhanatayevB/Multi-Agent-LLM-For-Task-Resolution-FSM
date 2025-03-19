@@ -178,6 +178,58 @@ Replace `YOUR_AZURE_OPENAI_API_KEY` with your actual Azure OpenAI API key in bot
 2. Provide your brand request ID
 3. Follow the automated process for status checks and ticket creation
 
+### ID Patterns and Their Flows
+
+The system uses specific ID patterns to simulate different scenarios and trigger corresponding flows, depending on which answers you provide the chatbot for your account ID and your listing ID it will go through a different flow:
+
+#### User ID Patterns
+- **1xxx**: Active account
+  - Response: "Your account is active"
+  - Flow: Proceeds to listing check
+
+- **2xxx**: Account in onboarding
+  - Response: "Your products aren't visible yet. Once onboarding is complete, your account will be activated within 48 hours"
+  - Flow: Terminates conversation
+
+- **5xxx**: Account with API issues
+  - Response: Triggers retry mechanism (up to 3 attempts)
+  - Flow: After 3 failed attempts, marks account as "on hold"
+
+#### Listing ID Patterns
+- **xxx1**: Inactive listing
+  - Response: "Your listing is currently inactive. Please activate it to be visible"
+  - Flow: Terminates conversation
+
+- **xxx2**: Blocked listing
+  - Response: "Your listing is blocked due to seller state change"
+  - Flow: Creates support ticket for reactivation
+
+- **xxx3**: Archived listing
+  - Response: "Your listing is archived and not visible to customers"
+  - Flow: Terminates conversation
+
+- **xxx4**: Pending approval (RFA)
+  - Response: "Your listing is pending approval (RFA)"
+  - Flow: Terminates conversation
+
+- **5xxx**: Listing with API issues
+  - Response: Triggers retry mechanism (up to 3 attempts)
+  - Flow: After 3 failed attempts, terminates conversation
+
+#### Brand Approval Request ID Patterns
+- **xxx1**: Approved request
+  - Response: "Your brand approval request is approved"
+  - Flow: Terminates conversation
+
+- **xxx2**: In-progress request
+  - Response: "Brand approval is still in progress"
+  - Flow: If timeline > 72 hours, creates support ticket
+
+- **xxx3**: Disapproved request
+  - Response: "Brand approval disapproved. Additional steps required"
+  - Flow: If timeline > 72 hours, creates support ticket
+
+
 ## Error Handling
 The system includes robust error handling:
 - Automatic retry mechanism for API calls
