@@ -141,6 +141,30 @@ Before running either version, make sure to:
 2. Configure the API endpoint and version
 3. Select the appropriate model (gpt-4o-mini, gpt-4o, or gpt-4)
 
+### API Key Configuration
+You need to add your Azure OpenAI API key in two places:
+
+1. In `main.py`:
+```python
+config_list = [
+    {
+        "model": "gpt-4o-mini",
+        "api_key": "YOUR_AZURE_OPENAI_API_KEY",  # Replace with your actual API key
+        "base_url": "https://capstone5.openai.azure.com/openai/deployments/gpt-4o-mini",
+        "api_version": "2024-02-15-preview",
+        "api_type": "azure",
+    }
+]
+```
+
+2. In `main_streamlit.py`:
+```python
+# API configuration in sidebar with proper secret handling
+api_key = st.sidebar.text_input("Azure OpenAI API Key", value="YOUR_AZURE_OPENAI_API_KEY", type="password")
+```
+
+Replace `YOUR_AZURE_OPENAI_API_KEY` with your actual Azure OpenAI API key in both locations.
+
 ## Usage Examples
 
 ### Listing Support
