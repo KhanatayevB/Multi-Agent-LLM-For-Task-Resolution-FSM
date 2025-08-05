@@ -26,7 +26,7 @@ retry_counts = {}  # Dictionary to track retry counts for different API calls
 config_list = [{
     "model": "gpt-4o-mini",
     "api_type": "azure",
-    "api_key": "YOUR_KEY_GOES_HERE",  # Replace with your secure key
+    "api_key": "9222bde64b194310b1aadcff3ae5b60b",  # Replace with your secure key
     "base_url": "https://fkopenai.openai.azure.com/",
     "api_version": "2024-02-15-preview"
 }]
